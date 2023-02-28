@@ -4,6 +4,7 @@ import { Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import myDate from "../myDate"; //date
 import axios from "axios";
+import { useTranslation } from "react-i18next"; //i18next
 
 export default function Home() {
   const [location, setLocation] = useState<string>("Ivano-Frankivsk");
@@ -14,6 +15,7 @@ export default function Home() {
   const [desc, setDesc] = useState<string>("");
   const [pressure, setPressure] = useState<number>(0);
   const [speed, setSpeed] = useState<number>(0);
+  const { t } = useTranslation(); //i18n
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=4f625b6c6693cf0b7d4d66e65cd65a7d`;
 
@@ -54,7 +56,7 @@ export default function Home() {
       }}
     >
       <Box sx={{padding:"20px", textAlign:"center"}}>
-        <Typography variant="h4">The weather in your city</Typography>
+        <Typography variant="h4">{t("titleHome")}</Typography>
       </Box>
       <Box sx={{ display: "flex", marginLeft: "20px" }}>
         <TextField
@@ -87,7 +89,7 @@ export default function Home() {
           }}
           onClick={searchLocation}
         >
-          search
+          {t("search")}
         </Button>
       </Box>
 
@@ -98,19 +100,19 @@ export default function Home() {
             <Typography>{date}</Typography>
           </Box>
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>Temperature</Typography>
+            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>{t("temp")}</Typography>
             <Typography>{temp}&deg;C</Typography>
           </Box>
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>Pressure</Typography>
+            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>{t("pressure")}</Typography>
             <Typography>{pressure}</Typography>
           </Box>
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>Wind speed</Typography>
+            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>{t("speed")}</Typography>
             <Typography>{speed}m/s</Typography>
           </Box>
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>Description</Typography>
+            <Typography sx={{ marginRight: "15px", minWidth:"130px" }}>{t("desc")}</Typography>
             <Typography>{desc}</Typography>
           </Box>
         </Box>
